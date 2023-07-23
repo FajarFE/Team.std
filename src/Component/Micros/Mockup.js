@@ -6,10 +6,10 @@ const MockupComponent = () => {
   console.log("Product Data:", product);
   return (
     <>
-      <section className="container mx-auto w-scree h-screen flex justify-start items-center grid grid-cols-12 ">
-        <div className="col-span-5 font-LexendDeca text-black flex flex-col gap-2">
-          <p className="text-[56px] font-bold">{mockup[0].h1}</p>
-          <p className="text-[20px] w-[90%] ">{mockup[0].text}</p>
+      <section className="container mx-auto w-scree lg:h-screen md:h-auto flex justify-start sm:my-20 items-center grid grid-cols-12 md:my-10">
+        <div className="md:col-span-12 lg:order-first sm:order-last sm:col-span-12 md:order-last lg:col-span-5 font-LexendDeca md:mt-10 md:px-10 text-black flex flex-col gap-2 sm:px-5">
+          <p className="sm:text-[35px] lg:text-[56px] md:text-[45px] font-bold">{mockup[0].h1}</p>
+          <p className="lg:text-[20px] md:text-[15px] lg:w-[90%] md:w-[100%]">{mockup[0].text}</p>
           <a className="flex gap-5 justify-start items-center mt-10 ">
             <p className="text-blue-600">Learn More</p>
             <svg
@@ -26,12 +26,12 @@ const MockupComponent = () => {
             </svg>
           </a>
         </div>
-        <div className="col-span-6 relative flex justify-center items-center  w-full h-full">
-          <div className="absolute -mr-[210px] -ml-[80px] overflow-hidden ">
+        <div className="md:col-span-12 sm:col-span-12  lg:col-span-6 md relative flex justify-center items-center  w-full h-full sm:mb-5">
+          <div className="lg:absolute md:block md:-mr-[310px] sm:-mr-[380px] -ml-[80px] overflow-hidden ">
             <img
               src={mockup[0].image}
               alt=""
-              style={{ height: "100%", width: "100%" }}
+              className="sm:h-[600px] sm:w-[600px] lg:h-[100%] lg:w-[100%] md:w-[70%]"
             />
           </div>
         </div>

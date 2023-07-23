@@ -22,3 +22,12 @@ code {
   font-family: 'Lexend Deca';
   src: url('../font/LexendDeca-VariableFont_wght.ttf') format('truetype');
 }
+
+.active{
+    visibility: visible !important;
+  }
+
+  .inactive{
+    visibility: hidden !important;
+    display: none !important;
+  }

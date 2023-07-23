@@ -29,16 +29,16 @@ const Navbar = () => {
     return (
     <nav className={`z-10 w-full py-2 transition-all duration-300`}>
             <div className="mx-auto container ">
-            <div className="relative flex h-20 items-center justify-between text-center">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <div className="relative flex h-20 items-center justify-between text-center sm:px-8 sm:w-full">
+            <div className="hidden lg:hidden sm:block md:block absolute inset-y-5 sm:left-[250px] flex items-center justify-center">
     
     <button type="button" className="inline-flex items-center justify-center rounded-md p-2 text-gray-400" aria-controls="mobile-menu" aria-expanded={showMenu ? 'true' : 'false'}
           onClick={() => setShowMenu(!showMenu)}>
 
-      <span className="sr-only">Open main menu</span>
+      <span className="sr-only flex justify-center items-center">Open main menu</span>
         {showMenu ? (
              <svg
-             className="block h-20 w-10"
+             className="block md:h-20 md:w-10 sm:w-14 sm:h-10"
              fill="none"
              viewBox="0 0 24 24"
              stroke-width="1.5"
@@ -49,7 +49,7 @@ const Navbar = () => {
            </svg>
         ):(
             <svg
-            className="block h-20 w-10"
+            className="block md:h-20 md:w-10 sm:w-14 sm:h-10"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
@@ -71,7 +71,7 @@ const Navbar = () => {
                    </div>
                 </div>
                     
-                <div className="hidden sm:ml-6 sm:block ">
+                <div className="block md:hidden sm:ml-6 sm:hidden lg:block ">
                     <div className="flex lg:space-x-8 md:space-x-1 text-center ">
                     <a href="/" className="text-white  hover:text-white px-3 py-2 text-base font-md hover:font-bold ">Product</a>
                     <a href="#Blog" className="text-white  hover:text-white px-3 py-2 text-base font-md hover:font-bold">Blog</a>
@@ -88,8 +88,8 @@ const Navbar = () => {
                 
                 </div>
             </div>
-            <div className={`sm:hidden backdrop-blur-sm  ${showMenu?"active" : "inactive"}`}>
-    <div className={`space-y-1 px-2 pt-2 pb-3 max-h-screen max-h-full`}>
+            <div className={`hidden sm:block backdrop-blur-sm ${showMenu?"active" : "inactive"}`}>
+    <div className={`space-y-1 px-2 pt-2 pb-3`}>
       <a href="/" className="text-gray-300 hover:font-bold hover:text-white block rounded-md px-3 py-2 text-base font-medium">Product</a>
 
       <a href="#Blog" className="text-gray-300 hover:font-bold hover:text-white block rounded-md px-3 py-2 text-base font-medium">Blog</a>

@@ -8,6 +8,11 @@ module.exports = {
       fontFamily: {
         'LexendDeca': ['Lexend Deca', 'cursive'],
       },
+      screens: {
+        'sm': '320px',
+        'md': '568px',
+        // Add more breakpoints here if needed
+      },
     },
   },
   plugins: [],

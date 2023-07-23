@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { reviewcarousel } from '../../Contans';
 
 export default function Review() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % reviewcarousel.length);
@@ -10,6 +19,31 @@ export default function Review() {
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + reviewcarousel.length) % reviewcarousel.length);
+  };
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      const newWindowWidth = window.innerWidth;
+
+      // Cek apakah terjadi perubahan ukuran layar medium (md) ke layar large (lg) atau sebaliknya
+      if (
+        (windowWidth < 768 && newWindowWidth >= 768) || // Ukuran layar dari md ke lg
+        (windowWidth >= 768 && newWindowWidth < 768) // Ukuran layar dari lg ke md
+      ) {
+        // Perbarui nilai currentIndex menjadi 0 agar selalu kembali ke review pertama saat terjadi perubahan ukuran layar
+        setCurrentIndex(0);
+      }
+
+      // Update nilai windowWidth sesuai dengan ukuran layar yang baru
+      setWindowWidth(newWindowWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, [windowWidth]);
+
+  const transformStyle = {
+    transform: windowWidth >= 768 ? `translateX(-${currentIndex * 410}px)` : `translateX(-${currentIndex * 315}px)`,
   };
 
   const renderSVG = () => (
@@ -29,17 +63,15 @@ export default function Review() {
 
   return (
     <>
-      <div className="flex flex-col h-screen w-screen gap-5 font-LexendDeca relative  mb-14">
-        <h1 className="text-[60px] flex justify-center items-center mb-20 mt-10 font-bold">What people say about the team</h1>
-        <div className="flex gap-5  ml-auto flex-col">
-          <div
-            className="flex transition-transform duration-500 gap-10 "
-            style={{ transform: `translateX(-${currentIndex * 410}px)` }}
-          >
+      {/* Konten lainnya */}
+      <div className="flex flex-col h-screen w-screen gap-5 font-LexendDeca relative  mb-10">
+        <h1 className=" sm:text-[30px] md:text-[40px] md:px-20 md:text-center sm:text-center lg:text-[60px] flex justify-center items-center lg:mb-20 lg:mt-10 font-bold">What people say about the team</h1>
+        <div className="flex gap-5 ml-auto h-auto flex-col">
+          <div className="flex transition-transform duration-500 sm:gap-5 lg:gap-10 md:gap-4" style={transformStyle}>
             {reviewcarousel.map((item, index) => (
-              <div
+                <div
                 key={index}
-                className="shadow-lg justify-start h-auto  p-8 w-[370px]  bg-white flex  flex-col py-10"
+                className="shadow-lg justify-start h-auto  p-8 md:w-[275px] sm:w-[280px] lg:w-[370px]  bg-white flex  flex-col py-10"
               >
                <div className="flex gap-2 mb-8">
                   {Array.from({ length: 5 }, (_, index) => (
@@ -49,10 +81,10 @@ export default function Review() {
                 <div className="h-auto">
                   <p>{item.paragraph}</p>
                 </div>
-                <div className="mt-10 flex gap-8">
-                  <img src={item.image} alt="" />
+                <div className="mt-10 flex gap-8 justify-start items-center">
+                  <img src={item.image} alt="" className="md:w-[50px] md:h-[50px]" />
                   <div className="flex flex-col justify-start items-start">
-                    <div className="text-[20px] ">{item.name}</div>
+                    <div className="lg:text-[20px] md:text-[15px]">{item.name}</div>
                     <div className="text-[15px] text-[#7676B2]">{item.position}</div>
                   </div>
                 </div>
@@ -60,9 +92,10 @@ export default function Review() {
             ))}
           </div>
         </div>
-        <div className="w-screen absolute flex items-center gap-20 bottom-0 left-[500px] justify-center">
+        <div className="w-screen absolute flex items-center sm:left-[80px] gap-20 bottom-0 md:left-[200px] lg:left-[500px] justify-center">
           <div className="flex justify-center items-center gap-10">
-          <button onClick={handlePrev}><svg
+            <button onClick={handlePrev}>
+            <svg
 width="60px"
 height="60px"
 viewBox="0 0 24 24"
@@ -78,10 +111,9 @@ xmlns="http://www.w3.org/2000/svg"
     fill="#5468E7"
   />
 </svg>
-
-</button>
-<button onClick={handleNext}>
-  <svg
+            </button>
+            <button onClick={handleNext}>
+            <svg
     width="60px"
     height="60px"
     viewBox="0 0 24 24"
@@ -96,9 +128,7 @@ xmlns="http://www.w3.org/2000/svg"
       fill="#5468E7"
     />
   </svg>
-</button>
-
-
+            </button>
           </div>
         </div>
       </div>

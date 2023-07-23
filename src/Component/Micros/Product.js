@@ -9,11 +9,11 @@ const ProductComponent = () => {
       {product.map((item, index) => (
         <section
           key={item.id} // Add a unique key for each mapped item
-          className="container mx-auto w-screen h-screen flex justify-start items-center grid grid-cols-12 gap-20 "
+          className="container mx-auto sm:w-screen sm:h-screen md:w-screen md:h-auto lg:w-screen lg:h-screen flex md:justify-start md:items-start grid grid-cols-12 lg:gap-20  sm:my-20 lg:justify-center lg:items-center"
         >
-          <div className={`col-span-6 font-LexendDeca text-black flex flex-col gap-2 ${index % 2 === 0 ? 'order-last' : 'order-first'}`}>
-            <p className="text-[56px] font-bold">{item.title}</p>
-            <p className="text-[20px] w-[90%] ">{item.paragraph}</p>
+          <div className={ `lg:gap-10 sm:pl-8 sm:col-span-12 lg:col-span-6 md:col-span-6 font-LexendDeca text-black md:px-5 flex flex-col gap-2 ${index % 2 === 0 ? 'md:order-last lg:order-last sm:order-last' : 'md:order-first lg:order-first sm:order-last'}`}>
+            <p className=" sm:text-[32px] md:text-[35px] lg:text-[56px] font-bold">{item.title}</p>
+            <p className="sm:text-[15px] lg:text-[20px] md:text-[16px] w-[90%] ">{item.paragraph}</p>
             <a className="flex gap-5 justify-start items-center mt-10 ">
               <a href="#" className="text-blue-600">Learn More</a>
               <svg
@@ -30,8 +30,8 @@ const ProductComponent = () => {
               </svg>
             </a>
           </div>
-          <div className={`col-span-6 relative flex justify-center items-center w-full h-full ${index % 2 === 0 ? 'order-first' : 'order-last'}`}>
-            <img src={item.image} alt="" style={{ width: '100%', height: '80%' }} />
+          <div className={` sm:col-span-12 lg:col-span-6 md:col-span-6 relative flex sm:justify-start md:justify-center md:items-start lg:justify-center lg:items-center w-full h-full ${index % 2 === 0 ? 'md:order-first lg:order-first sm:order-first' : 'md:order-last lg:order-last sm:order-first'}`}>
+            <img src={item.image} alt="" className="lg:w-[100%] lg:h-[80%] md:w-[100%] md:h-[90%] sm:w-[90%] sm:h-[95%] " />
           </div>
         </section>
       ))}
